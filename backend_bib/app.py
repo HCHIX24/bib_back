@@ -3,6 +3,7 @@ import logging
 from models import Book, BookType, Loan, User, db
 from flask_cors import CORS
 from flask_migrate import Migrate
+import os
 # Initialize Flask app and configure it
 app = Flask(__name__)
 CORS(app, origins=["http://127.0.0.1:5500"], methods=["GET", "POST", "PUT", "DELETE"])
@@ -21,7 +22,9 @@ logging.basicConfig(
 )
 
 # Configure the database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db' #deveoplement
+DATABASE_URL = os.getenv("DATABASE_URL", "postgres://username:password@your-db-host.render.com:5432/database_name")
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL.replace("postgres://", "postgresql://", 1) #production
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tracking for performance
 
 db.init_app(app)  # Properly initialize SQLAlchemy with the app
