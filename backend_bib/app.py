@@ -23,7 +23,7 @@ logging.basicConfig(
 
 # Configure the database
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db' #deveoplement
-DATABASE_URL = os.getenv("DATABASE_URL", "postgres://chix:Chickky123!@your-db-host.render.com:5000/db_biblioteca")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgres://postgres:Chickky123!@your-db-host.render.com:5000/db_biblioteca")
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL.replace("postgres://", "postgresql://", 1) #production
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tracking for performance
 
